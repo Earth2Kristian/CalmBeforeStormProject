@@ -224,6 +224,15 @@ public class PlayerControlsScript : MonoBehaviour
             velocity.y += gravity * Time.deltaTime;
             controller.Move(velocity * Time.deltaTime);
         }
+
+        if (GrappleScript.Instance.isGrappling == true)
+        {
+            controller.enabled = false;
+        }
+        if (GrappleScript.Instance.isGrappling ==  false) 
+        {
+            controller.enabled = true;
+        }
     }
 
     private IEnumerator Dodge()
