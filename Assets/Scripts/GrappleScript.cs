@@ -66,10 +66,10 @@ public class GrappleScript : MonoBehaviour
 
             lineRenderer.positionCount = 2;
 
+            isGrappling = true;
+
+
         }
-
-        isGrappling = true;
-
     }
 
     public void StopGrapple()

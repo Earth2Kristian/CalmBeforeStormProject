@@ -31,6 +31,7 @@ public class PlayerControlsScript : MonoBehaviour
     public bool isDodged = false;
     public float dodgeDistance = 12f;
     public float dodgeTimeLimited = 0.2f;
+    public bool canDash;
     //publicAudioSourceswimSoundEffect;
 
     public Transform playerBody;
@@ -59,6 +60,8 @@ public class PlayerControlsScript : MonoBehaviour
         jumpLimited = 2f;
 
         canDoubleJump = true;
+        canDash = true;
+
 
         rb.GetComponent<Rigidbody>();
         cc.GetComponent<CapsuleCollider>();
@@ -103,7 +106,7 @@ public class PlayerControlsScript : MonoBehaviour
         dodged = context.action.triggered;
         dodged = context.performed;
 
-        if (context.performed && !isDodged)
+        if (context.performed && !isDodged && canDash == true)
         {
 
             isDodged = true;
@@ -114,9 +117,8 @@ public class PlayerControlsScript : MonoBehaviour
             //GameManager.Instance.dashBar.UpdateDashBar(GameManager.Instance.dashCurrent, GameManager.Instance.dashLimited);
             //dashSoundEffect.Play();
 
-
-
             StartCoroutine(Dodge());
+            canDash = false;
         }
     }
 
@@ -126,7 +128,7 @@ public class PlayerControlsScript : MonoBehaviour
         dodged = context.action.triggered;
         dodged = context.performed;
 
-        if (context.performed && !isDodged)
+        if (context.performed && !isDodged && canDash == true)
         {
 
             isDodged = true;
@@ -139,6 +141,7 @@ public class PlayerControlsScript : MonoBehaviour
 
 
             StartCoroutine(Dodge());
+            canDash = false;
         }
     }
 
@@ -148,7 +151,7 @@ public class PlayerControlsScript : MonoBehaviour
         dodged = context.action.triggered;
         dodged = context.performed;
 
-        if (context.performed && !isDodged)
+        if (context.performed && !isDodged && canDash == true)
         {
 
             isDodged = true;
@@ -161,6 +164,7 @@ public class PlayerControlsScript : MonoBehaviour
 
 
             StartCoroutine(Dodge());
+            canDash = false;    
         }
     }
 
@@ -170,7 +174,7 @@ public class PlayerControlsScript : MonoBehaviour
         dodged = context.action.triggered;
         dodged = context.performed;
 
-        if (context.performed && !isDodged)
+        if (context.performed && !isDodged && canDash == true)
         {
 
             isDodged = true;
@@ -183,6 +187,7 @@ public class PlayerControlsScript : MonoBehaviour
 
 
             StartCoroutine(Dodge());
+            canDash = false;
         }
     }
 
@@ -218,6 +223,8 @@ public class PlayerControlsScript : MonoBehaviour
             // If the player is on the ground or on a platform
             velocity.y = 0f;
             canDoubleJump = true;
+            canDash = true;
+            controller.enabled = true;
         }
         else
         {
@@ -228,10 +235,6 @@ public class PlayerControlsScript : MonoBehaviour
         if (GrappleScript.Instance.isGrappling == true)
         {
             controller.enabled = false;
-        }
-        if (GrappleScript.Instance.isGrappling ==  false) 
-        {
-            controller.enabled = true;
         }
     }
 
