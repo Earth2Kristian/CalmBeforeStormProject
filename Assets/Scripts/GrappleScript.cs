@@ -19,6 +19,10 @@ public class GrappleScript : MonoBehaviour
     public Transform playerPosition;
     public Transform cameraPosition;
 
+    public float jointSpring = 5f;
+    public float jointDramper = 3f;
+    public float jointMassScale = 3f;
+
     public bool isGrappling;
     
     void Start()
@@ -57,12 +61,12 @@ public class GrappleScript : MonoBehaviour
 
             float distanceFromPoint = Vector3.Distance(playerPosition.position, grapplePoint);
 
-            joint.maxDistance = distanceFromPoint * 0.9f;
+            joint.maxDistance = distanceFromPoint * 0.85f;
             joint.minDistance = distanceFromPoint * 0.3f;
 
-            joint.spring = 5f;
-            joint.damper = 3f;
-            joint.massScale = 3f;
+            joint.spring = jointSpring;
+            joint.damper = jointDramper;
+            joint.massScale = jointMassScale;
 
             lineRenderer.positionCount = 2;
 
