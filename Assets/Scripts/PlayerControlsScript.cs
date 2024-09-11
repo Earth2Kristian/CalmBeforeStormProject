@@ -16,7 +16,7 @@ public class PlayerControlsScript : MonoBehaviour
     // Basic Movement Variables
     private Vector2 movementInput = Vector2.zero;
     private Vector3 velocity;
-    private float startingSpeed = 12f;
+    private float startingSpeed = 20f;
     public float currentSpeed;
 
     // Basic Jump Variables

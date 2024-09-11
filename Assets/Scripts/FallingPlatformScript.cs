@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class FallingPlatformScript : MonoBehaviour
 {
+    private static FallingPlatformScript instance = null;
+
     public Rigidbody rigidBody;
     public float fallingDelay = 1f;
+    public bool platformFall = false;
 
     void Start()
     {
@@ -13,11 +16,20 @@ public class FallingPlatformScript : MonoBehaviour
         rigidBody.GetComponent<Rigidbody>().useGravity = false;
     }
 
+    void Update()
+    {
+       if (platformFall == true)
+       {
+            StartCoroutine(Fall());
+       }
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.CompareTag("Player"))
         { 
            StartCoroutine (Fall());
+            platformFall = true;
         
         }
 
@@ -37,5 +49,18 @@ public class FallingPlatformScript : MonoBehaviour
     {
         yield return new WaitForSeconds(fallingDelay);
         rigidBody.GetComponent <Rigidbody>().useGravity = true;
+    }
+
+    void Awake()
+    {
+        instance = this;
+    }
+
+    public static FallingPlatformScript Instance
+    {
+        get
+        {
+            return instance;
+        }
     }
 }
