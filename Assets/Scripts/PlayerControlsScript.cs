@@ -206,6 +206,8 @@ public class PlayerControlsScript : MonoBehaviour
 
     void Update()
     {
+        if (!controller.enabled) return;
+
         // Basic Player Movement
         float moveHorizontal = movementInput.x;
         float moveVertical = movementInput.y;
@@ -217,6 +219,7 @@ public class PlayerControlsScript : MonoBehaviour
 
         // Checks the ground for the player
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+
 
         if (isGrounded && velocity.y < 0)
         {
@@ -232,7 +235,7 @@ public class PlayerControlsScript : MonoBehaviour
             controller.Move(velocity * Time.deltaTime);
         }
 
-        if (GrappleScript.Instance.isGrappling == true)
+        if (GrappleScript.Instance != null && GrappleScript.Instance.isGrappling == true)
         {
             controller.enabled = false;
         }

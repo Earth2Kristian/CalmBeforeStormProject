@@ -8,6 +8,7 @@ public class GrappleScript : MonoBehaviour
 {
     private static GrappleScript instance = null;
 
+
     private LineRenderer lineRenderer;
     private SpringJoint joint;
 
@@ -73,6 +74,7 @@ public class GrappleScript : MonoBehaviour
             isGrappling = true;
 
 
+
         }
     }
 
@@ -80,7 +82,9 @@ public class GrappleScript : MonoBehaviour
     {
         lineRenderer.positionCount = 0;
         Destroy(joint);
-        isGrappling = false; 
+        isGrappling = false;
+
+
     }
 
     public void DrawGrapple()

@@ -19,7 +19,7 @@ public class RespawnScript : MonoBehaviour
             Physics.SyncTransforms();
             //outSound.Play();
 
-            rb_Player.velocity = Vector3.zero;
+            rb_Player.linearVelocity = Vector3.zero;
         }
     }
 }
