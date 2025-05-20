@@ -14,8 +14,9 @@ public class PlayerControlsScript : MonoBehaviour
     public CharacterController controller;
 
     // Basic Movement Variables
+    public bool canMove;
     private Vector2 movementInput = Vector2.zero;
-    private Vector3 velocity;
+    public Vector3 velocity;
     private float startingSpeed = 20f;
     public float currentSpeed;
 
@@ -55,6 +56,8 @@ public class PlayerControlsScript : MonoBehaviour
 
     void Start()
     {
+        canMove = true; 
+
         currentSpeed = startingSpeed;
 
         jumpLimited = 2f;
@@ -206,15 +209,16 @@ public class PlayerControlsScript : MonoBehaviour
 
     void Update()
     {
-        if (!controller.enabled) return;
-
+       
         // Basic Player Movement
         float moveHorizontal = movementInput.x;
         float moveVertical = movementInput.y;
 
-        Vector3 move = transform.right * moveHorizontal + transform.forward * moveVertical;
-
-        controller.Move(move * currentSpeed * Time.deltaTime);
+        if (canMove == true) 
+        {
+           Vector3 move = transform.right * moveHorizontal + transform.forward * moveVertical;
+           controller.Move(move * currentSpeed * Time.deltaTime);
+        }
 
 
         // Checks the ground for the player
@@ -224,20 +228,32 @@ public class PlayerControlsScript : MonoBehaviour
         if (isGrounded && velocity.y < 0)
         {
             // If the player is on the ground or on a platform
-            velocity.y = 0f;
+            velocity.y = -2f;
             canDoubleJump = true;
             canDash = true;
-            controller.enabled = true;
+            canMove = true;
         }
         else
         {
             velocity.y += gravity * Time.deltaTime;
-            controller.Move(velocity * Time.deltaTime);
+
+            if (canMove == true) 
+            {
+                Vector3 velocityMove = new Vector3(0, velocity.y, 0);
+                controller.Move(velocityMove * Time.deltaTime);
+            }
+            
         }
 
-        if (GrappleScript.Instance != null && GrappleScript.Instance.isGrappling == true)
+
+        if (GrappleScript.Instance.isGrappling == false)
         {
-            controller.enabled = false;
+            //controller.enabled = true;
+        }
+
+        if (GrappleScript.Instance.isGrappling == true)
+        {
+            canMove = false;
         }
     }
 

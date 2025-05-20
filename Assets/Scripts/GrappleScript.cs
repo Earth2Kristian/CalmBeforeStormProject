@@ -84,6 +84,8 @@ public class GrappleScript : MonoBehaviour
         Destroy(joint);
         isGrappling = false;
 
+        PlayerControlsScript.Instance.velocity = Vector3.zero;
+
 
     }
 
