@@ -14,7 +14,7 @@ public class GrappleScript : MonoBehaviour
 
     private Vector3 grapplePoint;
     public LayerMask groundMask;
-    public float maxGrappleDistance = 50f;
+    public float maxGrappleDistance = 90f;
 
     public Transform grapplePosition;
     public Transform playerPosition;
@@ -63,7 +63,7 @@ public class GrappleScript : MonoBehaviour
             float distanceFromPoint = Vector3.Distance(playerPosition.position, grapplePoint);
 
             joint.maxDistance = distanceFromPoint * 0.85f;
-            joint.minDistance = distanceFromPoint * 0.3f;
+            joint.minDistance = distanceFromPoint * 0.2f;
 
             joint.spring = jointSpring;
             joint.damper = jointDramper;

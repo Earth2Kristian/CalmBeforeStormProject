@@ -209,6 +209,7 @@ public class PlayerControlsScript : MonoBehaviour
 
     void Update()
     {
+
        
         // Basic Player Movement
         float moveHorizontal = movementInput.x;
@@ -228,7 +229,7 @@ public class PlayerControlsScript : MonoBehaviour
         if (isGrounded && velocity.y < 0)
         {
             // If the player is on the ground or on a platform
-            velocity.y = -2f;
+            velocity.y = 0f;
             canDoubleJump = true;
             canDash = true;
             canMove = true;
@@ -239,8 +240,7 @@ public class PlayerControlsScript : MonoBehaviour
 
             if (canMove == true) 
             {
-                Vector3 velocityMove = new Vector3(0, velocity.y, 0);
-                controller.Move(velocityMove * Time.deltaTime);
+                controller.Move(velocity * Time.deltaTime);
             }
             
         }

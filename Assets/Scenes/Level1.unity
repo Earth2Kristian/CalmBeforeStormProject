@@ -246,12 +246,12 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 192
-  maxGrappleDistance: 50
+  maxGrappleDistance: 90
   grapplePosition: {fileID: 94914563}
   playerPosition: {fileID: 330889276}
   cameraPosition: {fileID: 490975978}
-  jointSpring: 6
-  jointDramper: 2
+  jointSpring: 4
+  jointDramper: 7
   jointMassScale: 3
   isGrappling: 0
 --- !u!120 &11944711
