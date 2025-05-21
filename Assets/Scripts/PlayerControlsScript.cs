@@ -210,16 +210,25 @@ public class PlayerControlsScript : MonoBehaviour
     void Update()
     {
 
-       
+        if (!controller.enabled) return;
+
+        if (canMove == false)
+        {
+            //velocity = Vector3.zero;
+            currentSpeed = 0f;
+        }
+  
+
         // Basic Player Movement
         float moveHorizontal = movementInput.x;
         float moveVertical = movementInput.y;
 
-        if (canMove == true) 
-        {
+
+           currentSpeed = startingSpeed;
+
            Vector3 move = transform.right * moveHorizontal + transform.forward * moveVertical;
            controller.Move(move * currentSpeed * Time.deltaTime);
-        }
+        
 
 
         // Checks the ground for the player
@@ -232,28 +241,28 @@ public class PlayerControlsScript : MonoBehaviour
             velocity.y = 0f;
             canDoubleJump = true;
             canDash = true;
-            canMove = true;
+            controller.enabled = true;
         }
         else
         {
             velocity.y += gravity * Time.deltaTime;
 
-            if (canMove == true) 
-            {
-                controller.Move(velocity * Time.deltaTime);
-            }
+          
+               controller.Move(velocity * Time.deltaTime);
+     
             
         }
 
 
         if (GrappleScript.Instance.isGrappling == false)
         {
-            //controller.enabled = true;
+            //canMove = true;
         }
 
-        if (GrappleScript.Instance.isGrappling == true)
+        if (GrappleScript.Instance != null && GrappleScript.Instance.isGrappling == true)
         {
             canMove = false;
+            controller.enabled = false;
         }
     }
 
@@ -264,6 +273,13 @@ public class PlayerControlsScript : MonoBehaviour
 
         velocity = Vector3.zero;
         isDodged = false;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        velocity = Vector3.zero;
+        controller.enabled = true;
+
     }
 
     void Awake()

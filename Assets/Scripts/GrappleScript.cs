@@ -16,6 +16,9 @@ public class GrappleScript : MonoBehaviour
     public LayerMask groundMask;
     public float maxGrappleDistance = 90f;
 
+    public float grappleCooldown = 0.25f;
+    public float grappleCooldownTimer;
+
     public Transform grapplePosition;
     public Transform playerPosition;
     public Transform cameraPosition;
@@ -43,6 +46,11 @@ public class GrappleScript : MonoBehaviour
         {
             StopGrapple();
         }
+
+        if (grappleCooldownTimer > 0)
+        {
+            grappleCooldownTimer -= Time.deltaTime;  
+        }
     }
 
     private void LateUpdate()
@@ -52,6 +60,11 @@ public class GrappleScript : MonoBehaviour
 
     public void StartGrapple()
     {
+        if (grappleCooldownTimer > 0)
+        {
+            return;
+        }
+
         RaycastHit hit;
         if (Physics.Raycast(cameraPosition.position, cameraPosition.forward, out hit, maxGrappleDistance, groundMask))
         {
@@ -76,6 +89,10 @@ public class GrappleScript : MonoBehaviour
 
 
         }
+        else
+        {
+            grapplePoint = cameraPosition.position + cameraPosition.forward * maxGrappleDistance;
+        }
     }
 
     public void StopGrapple()
@@ -86,7 +103,7 @@ public class GrappleScript : MonoBehaviour
 
         PlayerControlsScript.Instance.velocity = Vector3.zero;
 
-
+        grappleCooldownTimer = grappleCooldown;
     }
 
     public void DrawGrapple()

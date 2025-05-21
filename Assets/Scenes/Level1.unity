@@ -247,6 +247,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 192
   maxGrappleDistance: 90
+  grappleCooldown: 0.25
+  grappleCooldownTimer: 0
   grapplePosition: {fileID: 94914563}
   playerPosition: {fileID: 330889276}
   cameraPosition: {fileID: 490975978}
@@ -3911,7 +3913,7 @@ Transform:
   m_GameObject: {fileID: 942001047}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 8.949331, y: -17.410732, z: 8.481503}
+  m_LocalPosition: {x: -91.26, y: -15.28, z: 204}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
