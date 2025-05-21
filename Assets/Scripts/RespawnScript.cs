@@ -22,7 +22,7 @@ public class RespawnScript : MonoBehaviour
             rb_Player.linearVelocity = Vector3.zero;
 
             PlayerControlsScript.Instance.canMove = true;
-            GrappleScript.Instance.isGrappling = false;
+            GrappleScript.Instance.StopGrapple();
         }
     }
 }

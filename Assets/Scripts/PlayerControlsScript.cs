@@ -277,7 +277,7 @@ public class PlayerControlsScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        velocity = Vector3.zero;
+        //velocity = Vector3.zero;
         controller.enabled = true;
 
     }
